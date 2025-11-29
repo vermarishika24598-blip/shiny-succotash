@@ -6,7 +6,7 @@ export const projects = [
     tech: ["React", "Tailwind"],
     image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=1200",
     link: "https://strong-begonia-5b30bd.netlify.app/",
-    github: "",
+    github: "https://github.com/vermarishika24598-blip/shiny-succotash",
   },
 
   {
@@ -15,8 +15,8 @@ export const projects = [
     description: "A movie browsing app with search, filters, and dynamic UI.",
     tech: ["React", "Tailwind"],
     image: "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=1200",
-    link: "",
-    github: "",
+    link: "https://classy-centaur-c06c62.netlify.app/",
+    github: "https://github.com/vermarishika24598-blip/react-movie-explorer",
   },
 
   {

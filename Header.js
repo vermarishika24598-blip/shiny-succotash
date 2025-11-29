@@ -1,4 +1,8 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+
+
+
 
 export function Header() {
   return (
@@ -21,17 +25,17 @@ export function Header() {
 
           <div className="flex space-x-6 mt-3 md:mt-0 text-sm md:text-base">
             {["Home", "About", "Project", "Contact"].map((item, idx) => (
-              <motion.a
+              <motion.div
                 key={idx}
-                href={`#${item.toLowerCase()}`}
-                className="hover:text-orange-400"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 + idx * 0.1 }}
                 whileHover={{ scale: 1.2 }}
               >
-                {item}
-              </motion.a>
+                <Link to={`/${item.toLowerCase()}`} className="hover:text-orange-400">
+                  {item}
+                </Link>
+              </motion.div>
             ))}
           </div>
         </motion.div>
@@ -54,23 +58,26 @@ export function Header() {
             >
               <h2>Hello</h2>
               <h1>I'm Rishika</h1>
-              <motion.h1
-                className="text-orange-400"
-              >
+              <motion.h1 className="text-orange-400">
                 Frontend Developer
               </motion.h1>
             </motion.div>
 
             {/* BUTTONS */}
             <div className="space-x-6 mt-10 mb-12">
-              <motion.button
-                className="bg-orange-600 px-4 py-2 rounded-sm shadow-orange-500/50 hover:bg-orange-700 duration-200"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                Resume
-              </motion.button>
 
+              {/* RESUME BUTTON */}
+              <a href="https://docs.google.com/document/d/1VLKPWkN4PcMJGbpuBE5wJIi4jUVVxS7prTfx_i-MZY4/edit?tab=t.0" target="_blank" rel="noopener noreferrer">
+                <motion.button
+                  className="bg-orange-600 px-4 py-2 rounded-sm shadow-orange-500/50 hover:bg-orange-700 duration-200"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  Resume
+                </motion.button>
+              </a>
+
+              <a href="https://www.linkedin.com/in/rishika-verma-4561502a6/">
               <motion.button
                 className="border border-orange-500 px-4 py-2 hover:bg-orange-500/20 duration-200"
                 whileHover={{ scale: 1.1 }}
@@ -78,6 +85,7 @@ export function Header() {
               >
                 Get in touch
               </motion.button>
+              </a>
             </div>
           </motion.div>
 
@@ -86,18 +94,13 @@ export function Header() {
             className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full object-cover border-4 border-black"
             src="https://media.licdn.com/dms/image/v2/D4D03AQGO6TIbYnxh1A/profile-displayphoto-shrink_800_800/B4DZb.YgecGYAg-/0/1748024560061?e=1766016000&v=beta&t=655o5Nl68ZdGGzTQaONSVvFgrp2c4iAfp7kr8w4IbsA"
             alt="Rishika"
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-            whileHover={{ scale: 1.1 }}
-            animate={{ 
-              y: [0, -15, 0],
-            }}
+            
             transition={{
               duration: 4,
               repeat: Infinity,
               ease: "easeInOut"
             }}
+            whileHover={{ scale: 1.1 }}
           />
         </div>
 
