@@ -2,7 +2,7 @@
 A modern, animated portfolio built with **React, Tailwind CSS, and Framer Motion**.
 
 ## 🚀 Live Demo  
-(https://app.netlify.com/projects/rainbow-bublanina-5eb518/overview)
+(https://stately-dasik-404164.netlify.app/)
 
 ---
 
