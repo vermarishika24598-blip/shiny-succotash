@@ -2,7 +2,7 @@
 A modern, animated portfolio built with **React, Tailwind CSS, and Framer Motion**.
 
 ## 🚀 Live Demo  
-(https://app.netlify.com/projects/strong-begonia-5b30bd/overview)
+(https://app.netlify.com/projects/rainbow-bublanina-5eb518/overview)
 
 ---
 
