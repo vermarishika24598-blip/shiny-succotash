@@ -18,8 +18,12 @@ const cardVariants = {
 export function Project() {
   return (
     <>
-      <div className="pt-24 min-h-screen bg-neutral-950 text-gray-200 font-sans pb-16">
-        <div className="max-w-6xl mx-auto px-4 md:px-8">
+      <div className="pt-24 min-h-screen bg-neutral-950 text-gray-200 font-sans pb-16 relative overflow-hidden">
+        {/* Subtle Ambient Background Glow */}
+        <div className="absolute top-40 right-[-10%] w-96 h-96 bg-orange-600/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-10 left-[-10%] w-96 h-96 bg-neutral-800/20 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-6xl mx-auto px-4 md:px-8 relative z-10">
           
           {/* Heading Section */}
           <div className="text-center mb-16 space-y-2">
@@ -52,64 +56,68 @@ export function Project() {
             {projects.map((value) => (
               <motion.div
                 key={value.id}
-                className="bg-neutral-900/40 border border-neutral-800/80 rounded-2xl p-5 text-white flex flex-col justify-between shadow-xl relative group hover:border-neutral-700 transition-colors duration-300 backdrop-blur-sm"
+                className="bg-neutral-900/30 border border-neutral-900 rounded-2xl p-5 text-white flex flex-col justify-between shadow-xl relative group hover:border-neutral-800 transition-all duration-300 backdrop-blur-md"
                 variants={cardVariants}
                 whileHover={{ y: -6 }}
               >
-                <div>
-                  {/* IMAGE CONTAINER WITH ZOOM EFFECT */}
-                  <div className="rounded-xl h-48 w-full overflow-hidden relative border border-neutral-800">
-                    <img
-                      src={value.image}
-                      alt={value.title}
-                      className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+                <div className="flex flex-col h-full justify-between">
+                  <div>
+                    {/* ENHANCED IMAGE CONTAINER WITH GRADIENT OVERLAY */}
+                    <div className="rounded-xl h-48 w-full overflow-hidden relative border border-neutral-800/60 bg-neutral-950 flex items-center justify-center">
+                      <img
+                        src={value.image}
+                        alt={value.title}
+                        className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-85 group-hover:opacity-100"
+                      />
+                      {/* Premium Dark Vignette Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-300" />
+                    </div>
+
+                    {/* TITLE */}
+                    <h1 className="text-xl font-bold mt-5 text-neutral-100 group-hover:text-orange-400 transition-colors duration-300">
+                      {value.title}
+                    </h1>
+
+                    {/* DESCRIPTION */}
+                    <p className="text-neutral-400 text-sm mt-2 leading-relaxed font-sans text-justify line-clamp-4">
+                      {value.description}
+                    </p>
                   </div>
 
-                  {/* TITLE */}
-                  <h1 className="text-xl font-bold mt-4 text-neutral-100 group-hover:text-orange-400 transition-colors duration-300">
-                    {value.title}
-                  </h1>
+                  {/* BOTTOM CONTENT AREA TO ALIGN FOOTER */}
+                  <div>
+                    {/* TECH BADGES */}
+                    <div className="flex flex-wrap gap-1.5 mt-5">
+                      {value.tech.map((t, index) => (
+                        <span
+                          key={index}
+                          className="text-[10px] font-mono tracking-wider bg-neutral-900/80 border border-neutral-800/80 text-neutral-400 px-2.5 py-1 rounded-md"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
 
-                  {/* DESCRIPTION */}
-                  <p className="text-neutral-400 text-sm mt-2 leading-relaxed font-sans text-justify">
-                    {value.description}
-                  </p>
-                </div>
-
-                {/* BOTTOM CONTENT AREA TO ALIGN FOOTER */}
-                <div>
-                  {/* TECH BADGES */}
-                  <div className="flex flex-wrap gap-1.5 mt-4">
-                    {value.tech.map((t, index) => (
-                      <span
-                        key={index}
-                        className="text-[11px] font-mono tracking-wider bg-neutral-900 border border-neutral-800 text-gray-400 px-2.5 py-1 rounded-md"
+                    {/* INTERACTIVE ACTION LINKS */}
+                    <div className="mt-6 pt-4 border-t border-neutral-900/80 flex justify-between items-center text-xs font-semibold tracking-wide">
+                      <a
+                        href={value.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-neutral-900 border border-neutral-800 text-gray-300 px-4 py-2 rounded-xl hover:bg-white hover:text-black hover:border-white transition-all duration-200 flex items-center gap-1 shadow-sm font-mono text-[11px]"
                       >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+                        Live Demo <span>↗</span>
+                      </a>
 
-                  {/* INTERACTIVE ACTION LINKS */}
-                  <div className="mt-6 pt-4 border-t border-neutral-900 flex justify-between items-center text-xs font-semibold tracking-wide">
-                    <a
-                      href={value.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-neutral-900 border border-neutral-800 text-gray-300 px-4 py-2 rounded-xl hover:bg-white hover:text-black hover:border-white transition-all duration-200 flex items-center gap-1 shadow-sm"
-                    >
-                      Live Demo <span>↗</span>
-                    </a>
-
-                    <a
-                      href={value.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-neutral-400 hover:text-white px-2 py-2 transition-colors duration-200 flex items-center gap-1"
-                    >
-                      Codebase <span>→</span>
-                    </a>
+                      <a
+                        href={value.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-neutral-400 hover:text-white px-2 py-2 transition-colors duration-200 flex items-center gap-1 font-mono text-[11px]"
+                      >
+                        Codebase <span>→</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
 

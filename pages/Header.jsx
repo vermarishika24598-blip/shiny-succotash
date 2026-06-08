@@ -3,9 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 
 export function Header() {
   const location = useLocation();
-  
-  // Tumhara exact Google Docs resume link jisme original text data hai
-  const resumeLink = "https://docs.google.com/document/d/1VLKPWkN4PcMJGbpuBE5wJIi4jUVVxS7prTfx_i-MZY4/edit?tab=t.0";
 
   return (
     <div className="bg-neutral-950/80 text-gray-200 font-sans fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-neutral-900/60">
@@ -26,7 +23,7 @@ export function Header() {
           </motion.p>
         </Link>
 
-        {/* NAVIGATION LINKS & ACTION BUTTON */}
+        {/* NAVIGATION LINKS */}
         <div className="flex items-center space-x-5 md:space-x-8 text-xs md:text-sm font-medium tracking-wide">
           <div className="flex space-x-5 md:space-x-6">
             {["Home", "About", "Project", "Contact"].map((item, idx) => {
@@ -58,9 +55,6 @@ export function Header() {
               );
             })}
           </div>
-
-          {/* ACTIVE RESUME LINK ATTACHED HERE */}
-          
         </div>
       </motion.div>
     </div>

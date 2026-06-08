@@ -1,158 +1,179 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, useMotionTemplate } from "framer-motion";
 import { useRef } from "react";
 import { frontendSkills, backendSkills, programmingSkills } from "./skill";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 50 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 40 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
 };
 
+// FIX: Variable name cleaned up
 const staggerContainer = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.08 } },
 };
+
+function SkillCard({ children, className, variants, highlightColor = "orange" }) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  const glowColor = highlightColor === "purple" ? "rgba(147, 51, 234, 0.15)" : "rgba(249, 115, 22, 0.12)";
+
+  return (
+    <motion.div
+      variants={variants}
+      whileHover={{ y: -6 }}
+      onMouseMove={handleMouseMove}
+      className={`group relative overflow-hidden rounded-3xl border border-neutral-900 bg-neutral-900/10 p-6 text-center shadow-2xl backdrop-blur-md transition-all duration-300 hover:border-neutral-800/80 ${className}`}
+    >
+      <motion.div
+        className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition duration-300 group-hover:opacity-100"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              450px circle at ${mouseX}px ${mouseY}px,
+              ${glowColor},
+              transparent 80%
+            )
+          `,
+        }}
+      />
+      {children}
+    </motion.div>
+  );
+}
 
 export function About() {
   const containerRef = useRef(null);
   
-  // Dynamic Scroll Parallax Effect for a sophisticated background feel
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
   });
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+  
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
 
   return (
     <>
-      <div ref={containerRef} className="relative min-h-screen bg-neutral-950 pb-24 overflow-hidden pt-12">
-        
-        {/* Subtle Cyber Grid Layer behind content */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#171717_1px,transparent_1px),linear-gradient(to_bottom,#171717_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-30 pointer-events-none" />
+      <div ref={containerRef} className="relative min-h-screen overflow-hidden bg-neutral-950 pb-32 pt-16 selection:bg-orange-500/20 selection:text-orange-300">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f1f1f_1px,transparent_1px),linear-gradient(to_bottom,#1f1f1f_1px,transparent_1px)] bg-[size:4.5rem_4.5rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_60%,transparent_100%)] opacity-25 pointer-events-none" />
 
-        {/* Ambient Floating Glows */}
         <motion.div 
           style={{ y: backgroundY }}
-          className="absolute top-1/4 -left-20 w-80 h-80 bg-orange-600/10 rounded-full blur-[120px] pointer-events-none" 
+          className="absolute top-1/4 -left-32 w-96 h-96 bg-orange-600/[0.07] rounded-full blur-[130px] pointer-events-none" 
         />
         <motion.div 
           style={{ y: backgroundY }}
-          className="absolute top-1/2 -right-20 w-96 h-96 bg-purple-600/10 rounded-full blur-[150px] pointer-events-none" 
+          className="absolute top-1/3 -right-32 w-[30rem] h-[30rem] bg-purple-600/[0.07] rounded-full blur-[160px] pointer-events-none" 
         />
 
-        {/* ================= ABOUT MAIN SECTION ================= */}
-        <div className="max-w-4xl mx-auto px-4 mt-16 relative z-10">
+        <div className="max-w-4xl mx-auto px-4 mt-12 relative z-10">
           <motion.div
-            className="bg-neutral-900/30 border border-neutral-800/60 backdrop-blur-md rounded-3xl p-8 md:p-16 space-y-6 shadow-2xl relative group overflow-hidden"
+            className="bg-neutral-900/20 border border-neutral-800/40 backdrop-blur-xl rounded-3xl p-8 md:p-16 space-y-6 shadow-2xl relative group overflow-hidden"
             variants={fadeUp}
             initial="hidden"
             animate="show"
           >
-            {/* Top Minimalist Accent Line */}
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-neutral-700 to-transparent group-hover:via-orange-500 transition-all duration-700" />
+            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-neutral-700 to-transparent group-hover:via-gradient-to-r group-hover:from-transparent group-hover:via-orange-500 group-hover:to-transparent transition-all duration-1000" />
 
-            <div className="flex flex-col items-center space-y-3">
-              <span className="text-xs font-mono text-orange-500 tracking-[0.2em] uppercase font-bold bg-orange-500/5 px-3 py-1 rounded-full border border-orange-500/10">
-                01 . Synopsis
+            <div className="flex flex-col items-center space-y-4">
+              <span className="text-[10px] font-mono text-orange-400 tracking-[0.25em] uppercase font-bold bg-orange-500/10 px-3.5 py-1 rounded-full border border-orange-500/20 shadow-inner">
+                01 // Synopsis
               </span>
               <motion.h1 
-                className="text-4xl md:text-5xl font-extrabold tracking-tight text-white bg-gradient-to-b from-white to-neutral-400 bg-clip-text text-transparent"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
+                className="text-4xl md:text-6xl font-black tracking-tight text-white bg-gradient-to-b from-white via-neutral-200 to-neutral-500 bg-clip-text text-transparent"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
                 About Me
               </motion.h1>
             </div>
 
             <motion.p
-              className="text-sm md:text-base leading-relaxed text-neutral-400 font-sans max-w-3xl mx-auto text-justify md:text-center pt-4"
+              className="text-sm md:text-[15px] leading-relaxed text-neutral-400 font-sans max-w-2xl mx-auto text-center pt-4 border-t border-neutral-900/60"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.45, duration: 0.6 }}
             >
-              Hi, I’m <span className="text-white font-semibold">Rishika Verma</span>, a full-stack MERN Developer dedicated to engineering high-performance, scalable web applications and deploying advanced AI automations. Backed by a strong engineering foundation in C, C++, and Core Data Structures & Algorithms, I build digital architectures focused on clean logic and fast processing.
+              Hi, I’m <span className="text-white font-semibold hover:text-orange-400 transition-colors duration-200">Rishika Verma</span>, a full-stack MERN Developer dedicated to engineering high-performance, scalable web applications and deploying advanced AI automations. Backed by a strong engineering foundation in C, C++, and Core Data Structures & Algorithms, I build digital architectures focused on clean logic and fast processing.
               <br /><br />
               On the frontend, I create fluid, responsive, and pixel-perfect user interfaces using <span className="text-orange-400 font-medium">React</span> and modern state-management principles. On the backend, I design reliable scalable microservices using <span className="text-white font-medium">Node.js, Express, and MongoDB</span>—seamlessly structuring secure databases, implementing clean system utilities, and integrating powerful native AI orchestrations like <span className="text-purple-400 font-medium">VectorShift workflows</span>.
             </motion.p>
           </motion.div>
         </div>
 
-        {/* ================= TECHNICAL EXPERTISE SECTION ================= */}
-        <div className="pt-28 max-w-6xl mx-auto px-4 space-y-12 relative z-10">
-          
-          <div className="text-center space-y-2">
-            <span className="text-xs font-mono text-purple-400 tracking-[0.2em] uppercase font-bold bg-purple-500/5 px-3 py-1 rounded-full border border-purple-500/10">
-              02 . Capabilities
+        <div className="pt-32 max-w-6xl mx-auto px-4 space-y-16 relative z-10">
+          <div className="text-center space-y-3">
+            <span className="text-[10px] font-mono text-purple-400 tracking-[0.25em] uppercase font-bold bg-purple-500/10 px-3.5 py-1 rounded-full border border-purple-500/20 shadow-inner">
+              02 // Capabilities
             </span>
-            <motion.h1
-              className="font-extrabold text-3xl md:text-4xl tracking-tight text-white"
-              initial={{ opacity: 0, y: -10 }}
+            <motion.h2
+              className="font-black text-3xl md:text-5xl tracking-tight text-white"
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
               Technical Architecture
-            </motion.h1>
+            </motion.h2>
           </div>
 
+          {/* FIX: Handled corrected staggerContainer variable name here */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-start"
             variants={staggerContainer}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-50px" }}
           >
-            {/* Frontend Engineering Card */}
-            <motion.div
-              className="bg-neutral-900/20 border border-neutral-900 rounded-3xl p-6 text-center shadow-xl relative group hover:border-neutral-800 hover:bg-neutral-900/40 transition-all duration-300 backdrop-blur-sm"
-              variants={fadeUp}
-              whileHover={{ y: -4 }}
-            >
-              <div className="absolute top-4 right-5 font-mono text-xs text-neutral-700 group-hover:text-neutral-500 transition-colors">// FE</div>
-              <h2 className="text-lg font-bold mb-6 text-neutral-200 border-b border-neutral-900 pb-3 text-left pl-2 tracking-wide flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-orange-500" /> Frontend Engineering
-              </h2>
-
-              <div className="grid grid-cols-2 gap-2.5">
+            <SkillCard variants={fadeUp} highlightColor="orange">
+              <div className="absolute top-4 right-5 font-mono text-[10px] text-neutral-600 group-hover:text-neutral-400 transition-colors">// FE</div>
+              <h3 className="text-md font-bold mb-6 text-neutral-200 border-b border-neutral-900/80 pb-3 text-left pl-1 tracking-wide flex items-center gap-2.5">
+                <span className="w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.6)]" /> Frontend Engineering
+              </h3>
+              <div className="grid grid-cols-2 gap-2">
                 {frontendSkills.map((skill, index) => (
                   <motion.div
                     key={index}
-                    className="bg-neutral-950 border border-neutral-900 text-neutral-400 rounded-xl py-3 font-medium text-xs tracking-wide transition-all duration-200 hover:text-white hover:border-neutral-700 hover:bg-neutral-900"
-                    whileHover={{ scale: 1.03 }}
+                    className="bg-neutral-950/80 border border-neutral-900/60 text-neutral-400 rounded-xl py-2.5 font-medium text-xs tracking-wide transition-all duration-200 hover:text-white hover:border-neutral-700 hover:bg-neutral-900"
+                    whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     {skill}
                   </motion.div>
                 ))}
               </div>
-            </motion.div>
+            </SkillCard>
 
-            {/* Backend & AI Solutions Card */}
-            <motion.div
-              className="bg-neutral-900/20 border border-neutral-900 rounded-3xl p-6 text-center shadow-xl relative group hover:border-neutral-800 hover:bg-neutral-900/40 transition-all duration-300 backdrop-blur-sm md:-top-3 md:border-neutral-800/50"
-              variants={fadeUp}
-              whileHover={{ y: -7 }}
+            <SkillCard 
+              variants={fadeUp} 
+              highlightColor="purple" 
+              className="md:-top-4 border-neutral-800/40 bg-neutral-900/20 shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
             >
-              <div className="absolute top-4 right-5 font-mono text-xs text-purple-500 animate-pulse">// AI ACTIVE</div>
-              <h2 className="text-lg font-bold mb-6 text-neutral-200 border-b border-neutral-900 pb-3 text-left pl-2 tracking-wide flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-purple-500" /> Backend & AI Solutions
-              </h2>
-
-              <div className="grid grid-cols-2 gap-2.5">
+              <div className="absolute top-4 right-5 font-mono text-[9px] font-bold text-purple-400 tracking-wider bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20 animate-pulse">// AI ACTIVE</div>
+              <h3 className="text-md font-bold mb-6 text-neutral-200 border-b border-neutral-900/80 pb-3 text-left pl-1 tracking-wide flex items-center gap-2.5">
+                <span className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(147,51,234,0.6)]" /> Backend & AI Solutions
+              </h3>
+              <div className="grid grid-cols-2 gap-2">
                 {backendSkills.map((skill, index) => (
                   <motion.div
                     key={index}
-                    className="bg-neutral-950 border border-neutral-900 text-neutral-400 rounded-xl py-3 font-medium text-xs tracking-wide transition-all duration-200 hover:text-white hover:border-neutral-700 hover:bg-neutral-900"
-                    whileHover={{ scale: 1.03 }}
+                    className="bg-neutral-950/80 border border-neutral-900/60 text-neutral-400 rounded-xl py-2.5 font-medium text-xs tracking-wide transition-all duration-200 hover:text-white hover:border-neutral-700 hover:bg-neutral-900"
+                    whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     {skill}
                   </motion.div>
                 ))}
-                
-                {/* Custom Ultra-Glow VectorShift AI Badge */}
                 <motion.div
-                  className="bg-gradient-to-r from-purple-950/80 via-neutral-950 to-indigo-950/80 text-purple-300 rounded-xl py-3 font-bold text-xs border border-purple-500/20 shadow-md col-span-2 mt-1 flex items-center justify-center gap-1.5 hover:border-purple-500/60 hover:text-white transition-all duration-300 cursor-default"
+                  className="bg-gradient-to-r from-purple-950/50 via-neutral-950 to-indigo-950/50 text-purple-300 rounded-xl py-3 font-bold text-xs border border-purple-500/30 shadow-lg col-span-2 mt-1 flex items-center justify-center gap-2 hover:border-purple-500/70 hover:text-white transition-all duration-300 cursor-default"
                   whileHover={{ scale: 1.02 }}
                 >
                   <span className="relative flex h-2 w-2">
@@ -162,36 +183,28 @@ export function About() {
                   VectorShift AI Specialist
                 </motion.div>
               </div>
-            </motion.div>
+            </SkillCard>
 
-            {/* Computer Science Core Card */}
-            <motion.div
-              className="bg-neutral-900/20 border border-neutral-900 rounded-3xl p-6 text-center shadow-xl relative group hover:border-neutral-800 hover:bg-neutral-900/40 transition-all duration-300 backdrop-blur-sm"
-              variants={fadeUp}
-              whileHover={{ y: -4 }}
-            >
-              <div className="absolute top-4 right-5 font-mono text-xs text-neutral-700 group-hover:text-neutral-500 transition-colors">// CS</div>
-              <h2 className="text-lg font-bold mb-6 text-neutral-200 border-b border-neutral-900 pb-3 text-left pl-2 tracking-wide flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-neutral-400" /> Computer Science Core
-              </h2>
-
-              <div className="grid grid-cols-2 gap-2.5">
+            <SkillCard variants={fadeUp} highlightColor="orange">
+              <div className="absolute top-4 right-5 font-mono text-[10px] text-neutral-600 group-hover:text-neutral-400 transition-colors">// CS</div>
+              <h3 className="text-md font-bold mb-6 text-neutral-200 border-b border-neutral-900/80 pb-3 text-left pl-1 tracking-wide flex items-center gap-2.5">
+                <span className="w-2 h-2 rounded-full bg-neutral-400 shadow-[0_0_8px_rgba(163,163,163,0.4)]" /> Computer Science Core
+              </h3>
+              <div className="grid grid-cols-2 gap-2">
                 {programmingSkills.map((skill, index) => (
                   <motion.div
                     key={index}
-                    className="bg-neutral-950 border border-neutral-900 text-neutral-400 rounded-xl py-3 font-medium text-xs tracking-wide transition-all duration-200 hover:text-white hover:border-neutral-700 hover:bg-neutral-900"
-                    whileHover={{ scale: 1.03 }}
+                    className="bg-neutral-950/80 border border-neutral-900/60 text-neutral-400 rounded-xl py-2.5 font-medium text-xs tracking-wide transition-all duration-200 hover:text-white hover:border-neutral-700 hover:bg-neutral-900"
+                    whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     {skill}
                   </motion.div>
                 ))}
               </div>
-            </motion.div>
-
+            </SkillCard>
           </motion.div>
         </div>
-
       </div>
     </>
   );
