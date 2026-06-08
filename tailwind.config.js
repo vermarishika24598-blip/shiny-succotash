@@ -2,7 +2,8 @@
 module.exports = {
   content: [
     "./index.html",
-    "./src/**/*.{js,jsx,ts,tsx}",
+    "./index.jsx",
+    "./pages/**/*.{js,ts,jsx,tsx}", // Yeh line pages folder ki files ko scan karegi
   ],
   theme: {
     extend: {},
