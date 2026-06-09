@@ -9,7 +9,9 @@ export const frontendSkills = [
 export const backendSkills = [
   "Node.js",
   "Express.js",
-  "MongoDB"
+  "MongoDB",
+  "SQL",
+  "REST APIs",
 ];
 
 export const programmingSkills = [
