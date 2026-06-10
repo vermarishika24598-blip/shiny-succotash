@@ -26,7 +26,7 @@ export const projects = [
     tech: ["React.js", "Tailwind CSS", "REST API", "Asynchronous JS"],
     // Clean and direct cinema / movie concept image
     image: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200&auto=format&fit=crop&q=80", 
-    link: "https://react-movie-explorer-bice.vercel.app/", 
+    link: "https://react-movie-explorer-w35l.vercel.app/", 
     github: "https://github.com/vermarishika24598-blip/react-movie-explorer",
   }
 ];
