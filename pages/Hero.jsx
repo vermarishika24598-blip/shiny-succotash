@@ -39,10 +39,6 @@ export function Hero() {
           {/* Direct Navigation Links */}
           <nav className="md:col-span-5 flex flex-col gap-4 pt-1">
             
-            <a href="/project" className="group flex justify-between items-center border-b border-black py-3 hover:border-neutral-300 transition-colors">
-              <span className="text-[9px] uppercase tracking-[0.2em] font-bold"> Projects</span>
-              <span className="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">↗</span>
-            </a>
 
             <a href="https://github.com/vermarishika24598-blip" target="_blank" rel="noreferrer" className="group flex justify-between items-center border-b border-black py-3 hover:border-neutral-300 transition-colors">
               <span className="text-[9px] uppercase tracking-[0.2em] font-bold">Code / Github</span>
