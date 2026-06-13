@@ -1,39 +1,22 @@
-import React from "react";
-import Header, { Header } from "./Header";
-import About , { About }from "./About";
-import Project ,{ Project } from "./project";
-import Contact ,{ Contact } from "./Contact";
-import  Hero, {Hero}from "./Hero";
-import { BrowserRouter ,Routes,Route} from "react-router-dom";
+import { Header } from "./Header";
+import { Hero } from "./Hero";
+import { About } from "./About";
+import { Project } from "./Project";
+import { Contact } from "./Contact";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-function HomePage() {
+export default function App() {
   return (
-    <>
-      <Hero />
-      <About />
-      <Project />
-      <Contact />
-    </>
-  );
-}
-
-function App() {
-  return (
-    <BrowserRouter>
+    <Router>
       <Header />
-
-      <Routes>
-        {/* Home page shows ALL sections */}
-        <Route path="/" element={<HomePage />} />
-
-        {/* Individual pages */}
-        <Route path="/hero" element={<Hero />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/project" element={<Project />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-    </BrowserRouter>
+      <main>
+        <Routes>
+          <Route path="/" element={<Hero />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/project" element={<Project />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
+    </Router>
   );
 }
-
-export default App;

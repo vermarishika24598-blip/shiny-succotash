@@ -2,68 +2,59 @@ import { projects } from "./project.card.jsx";
 
 export function Project() {
   return (
-    <section className="min-h-screen bg-white text-black px-8 py-24 md:px-24">
-      <div className="max-w-[1200px] mx-auto">
-        
-        {/* Header */}
-        <header className="mb-24">
-          <h1 className="text-[clamp(3rem,8vw,6rem)] font-bold tracking-tighter uppercase">Works</h1>
-          <div className="w-full h-[1px] bg-black mt-4"></div>
-        </header>
+    <section className="py-24 px-6 md:px-16 max-w-5xl mx-auto">
+      {/* Header */}
+      <div className="mb-20">
+        <h2 className="text-sm font-semibold tracking-widest uppercase text-blue-600 mb-4">03 — Projects</h2>
+        <h1 className="text-4xl md:text-5xl font-light text-neutral-900 leading-tight">
+          Selected works & <span className="font-normal italic">experiments.</span>
+        </h1>
+      </div>
 
-        {/* Project Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-24">
-          {projects.map((p) => (
-            <article key={p.id} className="flex flex-col">
-              
-              {/* Image Frame */}
-              <div className="w-full aspect-[16/10] border border-black overflow-hidden mb-8">
-                <img
-                  src={p.image}
-                  alt={p.title}
-                  className="w-full h-full object-cover hover:scale-[1.02] transition-transform duration-700"
-                />
+      {/* Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        {projects.map((p) => (
+          <article 
+            key={p.id} 
+            className="group flex flex-col h-full border border-neutral-100 rounded-2xl overflow-hidden hover:border-neutral-200 transition-all hover:shadow-lg"
+          >
+            {/* Image */}
+            <div className="aspect-video w-full overflow-hidden bg-neutral-100">
+              <img
+                src={p.image}
+                alt={p.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Info */}
+            <div className="p-8 flex flex-col flex-grow">
+              <h3 className="text-lg font-medium text-neutral-900 mb-2">{p.title}</h3>
+              <p className="text-sm text-neutral-600 mb-6 leading-relaxed flex-grow">
+                {p.description}
+              </p>
+
+              {/* Tags */}
+              <div className="flex flex-wrap gap-2 mb-8">
+                {p.tech?.map((t) => (
+                  <span key={t} className="text-[10px] font-medium uppercase tracking-wider text-neutral-500 bg-neutral-100 px-2 py-1 rounded">
+                    {t}
+                  </span>
+                ))}
               </div>
 
-              {/* Title & Description */}
-              <div className="flex-grow">
-                <h2 className="text-2xl font-bold uppercase tracking-tight mb-3">{p.title}</h2>
-                <p className="text-sm text-neutral-600 leading-relaxed mb-6 max-w-sm">
-                  {p.description}
-                </p>
-                
-                {/* Tech Stack - Added this for better engineering feel */}
-                <div className="flex flex-wrap gap-2 mb-8">
-                  {p.tech?.map((t) => (
-                    <span key={t} className="text-[9px] uppercase tracking-widest border border-neutral-300 px-2 py-0.5 text-neutral-500">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex gap-3">
-                <a
-                  href={p.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="border border-black bg-black text-white px-6 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all"
-                >
-                  Live Demo
+              {/* Links */}
+              <div className="flex gap-4">
+                <a href={p.link} target="_blank" rel="noreferrer" className="text-xs font-bold uppercase tracking-widest text-blue-600 hover:text-blue-800">
+                  Live View ↗
                 </a>
-                <a
-                  href={p.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="border border-black bg-white text-black px-6 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all"
-                >
-                  Code
+                <a href={p.github} target="_blank" rel="noreferrer" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-neutral-900">
+                  GitHub ↗
                 </a>
               </div>
-            </article>
-          ))}
-        </div>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   );
