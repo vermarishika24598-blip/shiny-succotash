@@ -8,7 +8,6 @@ export const projects = [
     link: "https://group-project-solver.vercel.app/", 
     github: "https://github.com/vermarishika24598-blip/Group-project-solver",
   },
-
   {
     id: 2,
     title: "Tech Bay — Premium E-Commerce Platform",
@@ -18,15 +17,22 @@ export const projects = [
     link: "https://tech-bay-hp96.vercel.app/", 
     github: "https://github.com/hariom9617/tech-bay",
   },
-
   {
     id: 3,
     title: "Advanced Movie Explorer UI",
     description: "A high-fidelity asynchronous movie browsing web app utilizing dynamic search routing and fluid grid layout filters to process real-time media entertainment datasets.",
     tech: ["React.js", "Tailwind CSS", "REST API", "Asynchronous JS"],
-    // Clean and direct cinema / movie concept image
     image: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200&auto=format&fit=crop&q=80", 
     link: "https://react-movie-explorer-w35l.vercel.app/", 
     github: "https://github.com/vermarishika24598-blip/react-movie-explorer",
+  },
+  {
+    id: 4,
+    title: "JSON Formatter Tool",
+    description: "A clean, ad-free JSON formatting and validation utility designed for developers to quickly debug and structure API responses in MERN stack environments.",
+    tech: ["React", "JavaScript", "CSS"],
+    image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&auto=format&fit=crop&q=80", 
+    link: "https://json-formatter-react.vercel.app/", // Yaha apna final Vercel link daal dena
+    github: "https://github.com/vermarishika24598-blip/json-formatter-react",
   }
 ];
