@@ -1,7 +1,7 @@
 import { Header } from "./Header";
 import { Hero } from "./Hero";
 import { About } from "./About";
-import { Project } from "./Project";
+import { Project } from "./project";
 import { Contact } from "./Contact";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
