@@ -9,7 +9,8 @@ export function Hero() {
   const projects = [
     { name: "Task Manager", desc: "Real-time collaboration & task tracking", year: "2026" },
     { name: "E-Commerce", desc: "Full-stack store with JWT authentication", year: "2026" },
-    { name: "Movie Explorer", desc: "TMDB API integration & recommendations", year: "2025" }
+    { name: "Movie Explorer", desc: "TMDB API integration & recommendations", year: "2025" },
+    { name: "JSON Formatter", desc: "AD-free JSON formatting & validation tool", year: "2025" }
   ];
 
   return (
