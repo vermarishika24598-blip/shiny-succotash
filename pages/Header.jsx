@@ -1,46 +1,58 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 
 export function Header() {
-  const location = useLocation();
   const [isDark, setIsDark] = useState(false);
 
   const navItems = [
-    { label: "Home", path: "/" },
-    { label: "About", path: "/about" },
-    { label: "Projects", path: "/project" },
-    { label: "Contact", path: "/contact" }
+    { label: "Home", targetId: "hero" },
+    { label: "About", targetId: "about" },
+    { label: "Projects", targetId: "project" },
+    { label: "Contact", targetId: "contact" }
   ];
 
+  // Smooth scroll handler
+  const handleScroll = (e, targetId) => {
+    e.preventDefault();
+    const element = document.getElementById(targetId);
+
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    } else if (targetId === "hero") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
-    <header className={`fixed top-0 w-full z-50 transition-colors duration-300 ${isDark ? 'bg-neutral-950/90' : 'bg-white/90'} backdrop-blur-md border-b ${isDark ? 'border-neutral-800' : 'border-neutral-200'}`}>
+    <header className={`fixed top-0 w-full z-50 transition-colors duration-300 ${isDark ? 'bg-neutral-950/90 border-neutral-800' : 'bg-white/90 border-neutral-200'} backdrop-blur-md border-b`}>
       <nav className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
         
-        {/* Logo */}
-        <Link to="/" className={`font-medium tracking-tight hover:opacity-70 transition-opacity ${isDark ? 'text-white' : 'text-neutral-900'}`}>
+        {/* Logo Link */}
+        <a 
+          href="#hero" 
+          onClick={(e) => handleScroll(e, "hero")} 
+          className={`font-medium tracking-tight hover:opacity-70 transition-opacity cursor-pointer ${isDark ? 'text-white' : 'text-neutral-900'}`}
+        >
           rishika.dev
-        </Link>
+        </a>
 
-        {/* Navigation */}
+        {/* Navigation Items */}
         <div className="flex items-center gap-8">
-          {navItems.map((item) => {
-            const isActive = location.pathname === item.path;
-            return (
-              <Link
-                key={item.label}
-                to={item.path}
-                className={`text-sm font-medium transition-colors ${
-                  isActive 
-                    ? (isDark ? 'text-white' : 'text-neutral-900') 
-                    : (isDark ? 'text-neutral-500 hover:text-neutral-300' : 'text-neutral-500 hover:text-neutral-900')
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+          {navItems.map((item) => (
+            <a
+              key={item.label}
+              href={`#${item.targetId}`}
+              onClick={(e) => handleScroll(e, item.targetId)}
+              className={`text-sm font-medium transition-colors cursor-pointer ${
+                isDark 
+                  ? 'text-neutral-400 hover:text-white' 
+                  : 'text-neutral-600 hover:text-neutral-900'
+              }`}
+            >
+              {item.label}
+            </a>
+          ))}
 
-          {/* Theme Toggle */}
+          {/* Theme Toggle Button */}
           <button
             onClick={() => setIsDark(!isDark)}
             className={`w-8 h-8 flex items-center justify-center rounded-full border transition-all ${

@@ -2,7 +2,7 @@ import { projects } from "./project.card.jsx";
 
 export function Project() {
   return (
-    <section className="py-24 px-6 md:px-16 max-w-5xl mx-auto">
+    <section id="project" className="py-24 px-6 md:px-16 max-w-5xl mx-auto">
       {/* Header */}
       <div className="mb-20">
         <h2 className="text-sm font-semibold tracking-widest uppercase text-blue-600 mb-4">03 — Projects</h2>
