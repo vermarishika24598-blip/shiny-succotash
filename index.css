@@ -2,9 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: #FFFFFF;
-  color: #000000;
+/* Ye zaruri hai taaki browser ka default margin/padding reset ho jaye */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-y: auto !important; /* Scroll bar forced */
 }
