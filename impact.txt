@@ -1,0 +1,2 @@
+React+tailwind + parcel portfolio ko wsl pe build karke nginx se serve kiiya -> node version compatibloty issye samjhi or nvm se fix ki -> real production app ko web server se deploy karna seekha
+
