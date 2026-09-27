@@ -1,3 +1,5 @@
 React+tailwind + parcel portfolio ko wsl pe build karke nginx se serve kiiya -> node version compatibloty issye samjhi or nvm se fix ki -> real production app ko web server se deploy karna seekha
 
 GitHub Actions workflow banaya jo push par automatically build check karta hai -> CI/CD pipeline pehli baar khud chalaya aur green tick dekha -> automation ka basic concept samjha
+
+GitHub Actions workflow mein build verification step add kiya (dist folder check) -> pipeline ko robust banaya, sirf build nahi balki output bhi verify hota hai -> CI/CD pipeline design ka concept samjha
