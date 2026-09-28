@@ -7,3 +7,5 @@ portfolio ko multistage dockerfile se containerize kiya -> docker image successf
 
 GitHub Actions workflow mein build verification step add kiya (dist folder check) -> pipeline ko robust banaya, sirf build nahi balki output bhi verify hota hai -> CI/CD pipeline design ka concept samjha
  c942cbcf0458e26d3e9b3a41db9abd37dbee0e7c
+
+GitHub Actions workflow mein Docker build step add kiya -> CI pipeline ab automatically Docker image bhi banata hai har push par -> complete CI/CD workflow ka concept samjha, real production pipelines kaise design hote hain
