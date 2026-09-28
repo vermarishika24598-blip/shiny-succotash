@@ -15,6 +15,7 @@ jobs:
         run: npm install
       - name: Build project
         run: npx parcel build index.html
-
       - name: Check build output
         run: ls dist/
+      - name: Build Docker image
+        run: docker build -t rishika-portfolio:${{ github.sha }} .
