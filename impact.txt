@@ -1,4 +1,9 @@
 React+tailwind + parcel portfolio ko wsl pe build karke nginx se serve kiiya -> node version compatibloty issye samjhi or nvm se fix ki -> real production app ko web server se deploy karna seekha
 
 GitHub Actions workflow banaya jo push par automatically build check karta hai -> CI/CD pipeline pehli baar khud chalaya aur green tick dekha -> automation ka basic concept samjha
+
 portfolio ko multistage dockerfile se containerize kiya -> docker image successfully build ki aur container run kiya port 8080 pe -> containerization ka ral concept samjha , image size optimize karna seekha
+
+
+GitHub Actions workflow mein build verification step add kiya (dist folder check) -> pipeline ko robust banaya, sirf build nahi balki output bhi verify hota hai -> CI/CD pipeline design ka concept samjha
+ c942cbcf0458e26d3e9b3a41db9abd37dbee0e7c

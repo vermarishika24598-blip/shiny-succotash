@@ -15,3 +15,6 @@ jobs:
         run: npm install
       - name: Build project
         run: npx parcel build index.html
+
+      - name: Check build output
+        run: ls dist/
